@@ -5,8 +5,6 @@ import os
 
 
 def main():
-    repos = gitFunctions.read()
-
     print("===== Welcome to git-python-manager =====")
     print("To see all commands type 'help'")
     comand = ""
