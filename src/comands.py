@@ -76,13 +76,46 @@ def pull_projects():
     print("Pull operations done: {}/{}".format(counter - counter_errors, counter))
 
 
+def git_status():
+    counter = 0
+    counter_errors = 0
+    with open("../env/directories.txt", "r") as file:
+        for line in file:
+            success, error = gitFunctions.show_status(line[:-1])
+            counter += 1
+            if success:
+                pass
+            else:
+                print("ERROR - {}".format(line), end="")
+                counter_errors += 1
+    print("Status checked!")
+    print("Correct operations: {}/{}".format(counter - counter_errors, counter))
+
+
+def git_push():
+    counter = 0
+    counter_errors = 0
+    with open("../env/directories.txt", "r") as file:
+        for line in file:
+            success, error = gitFunctions.show_status(line[:-1])
+            counter += 1
+            if success:
+                pass
+            else:
+                print("ERROR - {}".format(line), end="")
+                counter_errors += 1
+    print("Status checked!")
+    print("Correct operations: {}/{}".format(counter - counter_errors, counter))
+
+
 actions = {
-    "help": {"description": "prints all available comands", "function": print_help},
+    "help": {"description": "print all available commands", "function": print_help},
     "exit": {"description": "exit script", "function": close_app},
     "close": {"description": "close script", "function": close_app},
     "list": {"description": "print list of directories of all repos", "function": repos_list},
     "add": {"description": "add patch to git project", "function": add_directory},
     "delete": {"description": "delete patch to git project", "function": delete_directory},
-    "pull": {"description": "pull to all projects", "function": pull_projects}
-
+    "pull": {"description": "pull to all projects", "function": pull_projects},
+    "status": {"description": "show status", "function": git_status},
+    "push": {"description": "push all commits", "function": pull_projects}
 }
