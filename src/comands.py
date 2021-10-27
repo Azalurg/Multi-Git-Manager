@@ -108,6 +108,22 @@ def git_push():
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
 
 
+def commit_all():
+    counter = 0
+    counter_errors = 0
+    with open("../env/directories.txt", "r") as file:
+        for line in file:
+            success, error = gitFunctions.commit_all_git(line[:-1])
+            counter += 1
+            if success:
+                pass
+            else:
+                print("ERROR - {}".format(line), end="")
+                counter_errors += 1
+    print("Status checked!")
+    print("Correct operations: {}/{}".format(counter - counter_errors, counter))
+
+
 actions = {
     "help": {"description": "print all available commands", "function": print_help},
     "exit": {"description": "exit script", "function": close_app},
@@ -117,5 +133,6 @@ actions = {
     "delete": {"description": "delete patch to git project", "function": delete_directory},
     "pull": {"description": "pull to all projects", "function": pull_projects},
     "status": {"description": "show status", "function": git_status},
-    "push": {"description": "push all commits", "function": pull_projects}
+    "push": {"description": "push all commits", "function": pull_projects},
+    "commit": {"description": "commits all", "function": commit_all}
 }

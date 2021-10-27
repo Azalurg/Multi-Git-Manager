@@ -32,7 +32,7 @@ def show_status(self):
     success, error = True, None
     try:
         repo = git.Repo(self)
-        if repo.index.diff(None) and repo.untracked_files:
+        if repo.index.diff(None) or repo.untracked_files:
             print("--------------------------------------------------------")
             print(self[:-1])
             print(repo.git.status(), '\n')
@@ -50,6 +50,18 @@ def push_all(self):
         repo = git.Repo(self)
         remote = repo.remote()
         remote.push()
+    except Exception as e:
+        success = False
+        error = e
+    return success, error
+
+
+def commit_all_git(self):
+    success, error = True, None
+    try:
+        repo = git.Repo(self)
+        repo.git.add(u=True)
+        repo.git.commit('-m', "test")
     except Exception as e:
         success = False
         error = e
