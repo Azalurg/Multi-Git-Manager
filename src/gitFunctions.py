@@ -60,7 +60,7 @@ def commit_all_git(self):
     success, error = True, None
     try:
         repo = git.Repo(self)
-        repo.git.add(u=True)
+        repo.git.add('--all')
         repo.git.commit('-m', "test")
     except Exception as e:
         success = False
