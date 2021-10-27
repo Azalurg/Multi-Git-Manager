@@ -1,4 +1,4 @@
-import comands
+import actions
 
 
 def main():
@@ -7,8 +7,8 @@ def main():
     comand = ""
     while comand != "exit" and comand != "close":
         comand = input(">>> ")
-        if comand in comands.actions.keys():
-            comands.actions[comand]["function"]()
+        if comand in actions.actions.keys():
+            actions.actions[comand]["function"]()
 
 
 main()
