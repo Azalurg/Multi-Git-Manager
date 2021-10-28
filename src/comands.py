@@ -71,7 +71,7 @@ def projects_pull():
     counter_errors = 0
     with open(path, "r") as file:
         for line in file:
-            success, error = gitFunctions.pull_project(line[:-1])
+            success, error = gitFunctions.pull_all(line[:-1])
             counter += 1
             if success:
                 print("Pull - {}".format(line), end="")
@@ -79,7 +79,7 @@ def projects_pull():
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
     print("You are up to date!")
-    print("Pull operations done: {}/{}".format(counter - counter_errors, counter))
+    print("Correct operations: {}/{}".format(counter - counter_errors, counter))
 
 
 def projects_status():
@@ -87,7 +87,7 @@ def projects_status():
     counter_errors = 0
     with open(path, "r") as file:
         for line in file:
-            success, error = gitFunctions.show_status(line[:-1])
+            success, error = gitFunctions.status_all(line[:-1])
             counter += 1
             if success:
                 pass
@@ -110,7 +110,7 @@ def projects_push():
             else:
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
-    print("Status checked!")
+    print("All pushed!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
 
 
@@ -126,5 +126,5 @@ def projects_commit():
             else:
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
-    print("Status checked!")
+    print("Commits done!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
