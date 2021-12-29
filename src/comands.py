@@ -99,6 +99,7 @@ def git_push():
         for line in file:
             success, error = gitFunctions.show_status(line[:-1])
             counter += 1
+            print("OK - {}".format(line), end="")
             if success:
                 pass
             else:
