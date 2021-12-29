@@ -1,3 +1,6 @@
+import gitFunctions
+
+
 def repos_list():
     with open("../env/directories.txt", "r") as file:
         for line in file:
@@ -22,11 +25,11 @@ def add_directory():
 def delete_directory():
     print("Select number of line you want to delete")
     print("To delete all enter '000'")
-    list = []
+    dir_list = []
     with open("../env/directories.txt", "r") as file:
         counter = 1
         for line in file:
-            list.append(line)
+            dir_list.append(line)
             print(str(counter) + ". " + line, end="")
             counter += 1
     decision = input("Enter your choice: ")
@@ -35,8 +38,8 @@ def delete_directory():
     else:
         try:
             decision = int(decision)
-            if int(decision) <= len(list):
-                print("You are about to delete: " + list[int(decision) - 1],end="")
+            if int(decision) <= len(dir_list):
+                print("You are about to delete: " + dir_list[int(decision) - 1], end="")
             else:
                 print("Wrong input")
                 pass
@@ -50,11 +53,27 @@ def delete_directory():
             file = open("../env/directories.txt", "w")
             file.close()
         else:
-            list.pop(int(decision-1))
+            dir_list.pop(int(decision - 1))
             file = open("../env/directories.txt", "w")
-            for line in list:
+            for line in dir_list:
                 file.write(line)
             file.close()
+
+
+def pull_projects():
+    counter = 0
+    counter_errors = 0
+    with open("../env/directories.txt", "r") as file:
+        for line in file:
+            success, error = gitFunctions.pull_project(line[:-1])
+            counter += 1
+            if success:
+                print("OK - {}".format(line), end="")
+            else:
+                print("ERROR - {}".format(line), end="")
+                counter_errors += 1
+    print("You are up to date!")
+    print("Pull operations done: {}/{}".format(counter - counter_errors, counter))
 
 
 actions = {
@@ -63,5 +82,7 @@ actions = {
     "close": {"description": "close script", "function": close_app},
     "list": {"description": "print list of directories of all repos", "function": repos_list},
     "add": {"description": "add patch to git project", "function": add_directory},
-    "delete": {"description": "delete patch to git project", "function": delete_directory}
+    "delete": {"description": "delete patch to git project", "function": delete_directory},
+    "pull": {"description": "pull to all projects", "function": pull_projects}
+
 }
