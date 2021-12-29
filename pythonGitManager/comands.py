@@ -2,7 +2,7 @@ import gitFunctions
 import actions
 from termcolor import colored
 
-path = "paths.txt"
+path = "../data/paths.txt"
 
 
 def print_all_paths():

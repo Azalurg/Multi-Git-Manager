@@ -23,10 +23,10 @@ def status_all(self):
         repo = git.Repo(self)
         status = repo.git.status()
 
-        if "nothing to commit, working tree clean" in status:
-            print(colored("Nothing to commit", 'green'))
-        else:
+        if ("Your branch is ahead" or "Changes not staged for commit" or "Untracked files" or "Changes to be committed") in status:
             print(status)
+        else:
+            print(colored("Nothing to commit", 'green'))
     except Exception as e:
         success = False
         error = e
