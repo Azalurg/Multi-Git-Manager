@@ -1,10 +1,16 @@
 import gitFunctions
+import actions
+
+path = "paths.txt"
 
 
-def repos_list():
-    with open("../env/directories.txt", "r") as file:
-        for line in file:
-            print(line, end="")
+def print_all_paths():
+    try:
+        with open(path) as file:
+            for line in file:
+                print(line, end="")
+    except Exception as e:
+        print(e)
 
 
 def close_app():
@@ -12,21 +18,21 @@ def close_app():
 
 
 def print_help():
-    for key, values in actions.items():
-        print(str(key) + ": " + values["description"])
+    for key, val in actions.actions.items():
+        print(str(key) + ": " + val["description"])
 
 
-def add_directory():
-    with open("../env/directories.txt", "a") as file:
-        path = input("enter the path: ")
-        file.write(path + "\n")
+def add_path():
+    with open(path, "a") as file:
+        val = input("enter the path: ")
+        file.write(val + "\n")
 
 
-def delete_directory():
+def delete_path():
     print("Select number of line you want to delete")
     print("To delete all enter '000'")
     dir_list = []
-    with open("../env/directories.txt", "r") as file:
+    with open(path, "r") as file:
         counter = 1
         for line in file:
             dir_list.append(line)
@@ -46,29 +52,29 @@ def delete_directory():
 
         except ValueError:
             print("Wrong input")
-            pass
-    agriment = input("(Y/n) ")
-    if agriment in ["Y", "y", "yes", "Yes", "YES"]:
+
+    agreement = input("(Y/n) ")
+    if agreement in ["Y", "y", "yes", "Yes", "YES"]:
         if decision == "000":
-            file = open("../env/directories.txt", "w")
+            file = open(path, "w")
             file.close()
         else:
             dir_list.pop(int(decision - 1))
-            file = open("../env/directories.txt", "w")
+            file = open(path, "w")
             for line in dir_list:
                 file.write(line)
             file.close()
 
 
-def pull_projects():
+def projects_pull():
     counter = 0
     counter_errors = 0
-    with open("../env/directories.txt", "r") as file:
+    with open(path, "r") as file:
         for line in file:
             success, error = gitFunctions.pull_project(line[:-1])
             counter += 1
             if success:
-                print("OK - {}".format(line), end="")
+                print("Pull - {}".format(line), end="")
             else:
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
@@ -76,10 +82,10 @@ def pull_projects():
     print("Pull operations done: {}/{}".format(counter - counter_errors, counter))
 
 
-def git_status():
+def projects_status():
     counter = 0
     counter_errors = 0
-    with open("../env/directories.txt", "r") as file:
+    with open(path, "r") as file:
         for line in file:
             success, error = gitFunctions.show_status(line[:-1])
             counter += 1
@@ -92,16 +98,15 @@ def git_status():
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
 
 
-def git_push():
+def projects_push():
     counter = 0
     counter_errors = 0
-    with open("../env/directories.txt", "r") as file:
+    with open(path, "r") as file:
         for line in file:
-            success, error = gitFunctions.show_status(line[:-1])
+            success, error = gitFunctions.push_all(line[:-1])
             counter += 1
-            print("OK - {}".format(line), end="")
             if success:
-                pass
+                print("Push - {}".format(line), end="")
             else:
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
@@ -109,31 +114,17 @@ def git_push():
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
 
 
-def commit_all():
+def projects_commit():
     counter = 0
     counter_errors = 0
-    with open("../env/directories.txt", "r") as file:
+    with open(path, "r") as file:
         for line in file:
             success, error = gitFunctions.commit_all_git(line[:-1])
             counter += 1
             if success:
-                pass
+                print("Commit - {}".format(line), end="")
             else:
                 print("ERROR - {}".format(line), end="")
                 counter_errors += 1
     print("Status checked!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
-
-
-actions = {
-    "help": {"description": "print all available commands", "function": print_help},
-    "exit": {"description": "exit script", "function": close_app},
-    "close": {"description": "close script", "function": close_app},
-    "list": {"description": "print list of directories of all repos", "function": repos_list},
-    "add": {"description": "add patch to git project", "function": add_directory},
-    "delete": {"description": "delete patch to git project", "function": delete_directory},
-    "pull": {"description": "pull to all projects", "function": pull_projects},
-    "status": {"description": "show status", "function": git_status},
-    "push": {"description": "push all commits", "function": pull_projects},
-    "commit": {"description": "commits all", "function": commit_all}
-}
