@@ -1,14 +1,15 @@
 import actions
+from termcolor import colored
 
 
 def main():
-    print("===== Welcome to git-python-manager =====")
+    print(colored("===== Welcome to git-python-manager =====", "cyan"))
     print("To see all commands type 'help'")
-    comand = ""
-    while comand != "exit" and comand != "close":
-        comand = input(">>> ")
-        if comand in actions.actions.keys():
-            actions.actions[comand]["function"]()
+    command = ""
+    while command != "exit" and command != "close":
+        command = input(">>> ")
+        if command in actions.actions.keys():
+            actions.actions[command]["function"]()
 
 
 main()

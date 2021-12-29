@@ -1,3 +1,5 @@
-cd src\
-python main.py
-pause
+@ECHO OFF
+
+cd pythonGitManager/
+
+python pythonGitManager.py

@@ -23,10 +23,15 @@ def status_all(self):
         repo = git.Repo(self)
         status = repo.git.status()
 
-        if ("Your branch is ahead" or "Changes not staged for commit" or "Untracked files" or "Changes to be committed") in status:
+        if (
+            "Your branch is ahead"
+            or "Changes not staged for commit"
+            or "Untracked files"
+            or "Changes to be committed"
+        ) in status:
             print(status)
         else:
-            print(colored("Nothing to commit", 'green'))
+            print(colored("Nothing to commit", "green"))
     except Exception as e:
         success = False
         error = e
@@ -50,8 +55,8 @@ def commit_all_git(self):
         now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         repo = git.Repo(self)
-        repo.git.add('--all')
-        repo.git.commit('-m', "Auto commit done at {}".format(dt_string))
+        repo.git.add("--all")
+        repo.git.commit("-m", "Auto commit done at {}".format(dt_string))
     except Exception as e:
         success = False
         error = e

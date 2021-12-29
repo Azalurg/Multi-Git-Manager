@@ -41,12 +41,17 @@ def delete_path():
             counter += 1
     decision = input("Enter your choice: ")
     if decision == "000":
-        print(colored("!!! YOU ARE ABOUT TO DELETE ALL PATHS !!!", 'red'))
+        print(colored("!!! YOU ARE ABOUT TO DELETE ALL PATHS !!!", "red"))
     else:
         try:
             decision = int(decision)
             if int(decision) <= len(dir_list):
-                print(colored("You are about to delete: " + dir_list[int(decision) - 1], "red"), end="")
+                print(
+                    colored(
+                        "You are about to delete: " + dir_list[int(decision) - 1], "red"
+                    ),
+                    end="",
+                )
             else:
                 print("Wrong input")
                 pass
@@ -75,7 +80,7 @@ def projects_pull():
             success, error = gitFunctions.pull_all(line[:-1])
             counter += 1
             if success:
-                print(colored("Pull - {}".format(line), 'green'), end="")
+                print(colored("Pull - {}".format(line), "green"), end="")
             else:
                 print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
@@ -125,7 +130,7 @@ def projects_commit():
             if success:
                 print(colored("Commit - {}".format(line)), "green", end="")
             else:
-                print(colored("ERROR - {}".format(line), "red"), end="")
+                # print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
     print("Commits done!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))

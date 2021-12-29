@@ -10,5 +10,5 @@ actions = {
     "pull": {"description": "pull all projects", "function": c.projects_pull},
     "status": {"description": "show all status", "function": c.projects_status},
     "push": {"description": "push all commits", "function": c.projects_push},
-    "commit": {"description": "commits all projects", "function": c.projects_commit}
+    "commit": {"description": "commits all projects", "function": c.projects_commit},
 }
