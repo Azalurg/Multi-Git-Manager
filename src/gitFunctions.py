@@ -1,13 +1,8 @@
 import git
+from datetime import datetime
 
 
-def untracked_files(repos):
-    for repo in repos:
-        file_list = repo.untracked_files
-        print(repo, file_list)
-
-
-def pull_project(self):
+def pull_all(self):
     success, error = True, None
     try:
         repo = git.Repo(self)
@@ -19,7 +14,7 @@ def pull_project(self):
     return success, error
 
 
-def show_status(self):
+def status_all(self):
     success, error = True, None
     try:
         repo = git.Repo(self)
@@ -49,9 +44,11 @@ def push_all(self):
 def commit_all_git(self):
     success, error = True, None
     try:
+        now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         repo = git.Repo(self)
         repo.git.add('--all')
-        repo.git.commit('-m', "test")
+        repo.git.commit('-m', "Auto commit done at {}".format(dt_string))
     except Exception as e:
         success = False
         error = e
