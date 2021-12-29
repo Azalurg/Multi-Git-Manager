@@ -18,12 +18,9 @@ def status_all(self):
     success, error = True, None
     try:
         repo = git.Repo(self)
-        if repo.index.diff(None) == repo.untracked_files:
-            print("--------------------------------------------------------")
-            print(self[:-1])
-            print(repo.git.status(), '\n')
-        else:
-            print("Status - {}".format(self), end="")
+        print("--------------------------------------------------------")
+        print(self[:-1])
+        print(repo.git.status(), '\n')
     except Exception as e:
         success = False
         error = e
