@@ -1,5 +1,6 @@
 import gitFunctions
 import actions
+from termcolor import colored
 
 path = "paths.txt"
 
@@ -40,12 +41,12 @@ def delete_path():
             counter += 1
     decision = input("Enter your choice: ")
     if decision == "000":
-        print("!!! YOU ARE ABOUT TO DELETE ALL PATHS !!!")
+        print(colored("!!! YOU ARE ABOUT TO DELETE ALL PATHS !!!", 'red'))
     else:
         try:
             decision = int(decision)
             if int(decision) <= len(dir_list):
-                print("You are about to delete: " + dir_list[int(decision) - 1], end="")
+                print(colored("You are about to delete: " + dir_list[int(decision) - 1], "red"), end="")
             else:
                 print("Wrong input")
                 pass
@@ -74,9 +75,9 @@ def projects_pull():
             success, error = gitFunctions.pull_all(line[:-1])
             counter += 1
             if success:
-                print("Pull - {}".format(line), end="")
+                print(colored("Pull - {}".format(line), 'green'), end="")
             else:
-                print("ERROR - {}".format(line), end="")
+                print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
     print("You are up to date!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
@@ -92,7 +93,7 @@ def projects_status():
             if success:
                 pass
             else:
-                print("ERROR - {}".format(line), end="")
+                print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
     print("Status checked!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
@@ -106,9 +107,9 @@ def projects_push():
             success, error = gitFunctions.push_all(line[:-1])
             counter += 1
             if success:
-                print("Push - {}".format(line), end="")
+                print(colored("Push - {}".format(line), "green"), end="")
             else:
-                print("ERROR - {}".format(line), end="")
+                print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
     print("All pushed!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))
@@ -122,9 +123,9 @@ def projects_commit():
             success, error = gitFunctions.commit_all_git(line[:-1])
             counter += 1
             if success:
-                print("Commit - {}".format(line), end="")
+                print(colored("Commit - {}".format(line)), "green", end="")
             else:
-                print("ERROR - {}".format(line), end="")
+                print(colored("ERROR - {}".format(line), "red"), end="")
                 counter_errors += 1
     print("Commits done!")
     print("Correct operations: {}/{}".format(counter - counter_errors, counter))

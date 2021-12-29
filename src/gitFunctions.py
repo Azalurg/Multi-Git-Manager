@@ -1,5 +1,6 @@
 import git
 from datetime import datetime
+from termcolor import colored
 
 
 def pull_all(self):
@@ -16,11 +17,16 @@ def pull_all(self):
 
 def status_all(self):
     success, error = True, None
+    print("--------------------------------------------------------")
+    print(self)
     try:
         repo = git.Repo(self)
-        print("--------------------------------------------------------")
-        print(self[:-1])
-        print(repo.git.status(), '\n')
+        status = repo.git.status()
+
+        if "nothing to commit, working tree clean" in status:
+            print(colored("Nothing to commit", 'green'))
+        else:
+            print(status)
     except Exception as e:
         success = False
         error = e
