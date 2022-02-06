@@ -1,4 +1,4 @@
-# PythonGitScript
+# Multi Git Manager
 
 The point of this application is to automatically pull/commit/push changes on a lot of repositories with only one command. I use it every day to track all the study repositories I work with at University.
 
