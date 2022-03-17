@@ -1,5 +1,5 @@
 import gitFunctions
-import actions
+import commands
 from termcolor import colored
 
 path = "../data/paths.txt"
@@ -19,8 +19,8 @@ def close_app():
 
 
 def print_help():
-    for key, val in actions.actions.items():
-        print(str(key) + ": " + val["description"])
+    for key, val in commands.commands.items():
+        print(colored(str(key), "cyan") + "\t-   " + val["description"])
 
 
 def add_path():
