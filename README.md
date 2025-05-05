@@ -1,25 +1,28 @@
 # Multi Git Manager
 
-The point of this application is to automatically pull/commit/push changes on a lot of repositories with only one command. I use it every day to track all the study repositories I work with at University.
+Multi Git Manager is a Python-based tool designed to simplify Git operations across multiple repositories. With just a single command, you can automatically pull, commit, and push changes to numerous repositories at once. This tool is perfect for managing large numbers of projects, such as university study repositories, personal projects, or team workflows.
+
+I use it on a daily basis to keep all the projects I work on up to date, and I'm glad that I can share it with others who can consider it useful!
+
+## Demo
 
 Check the quick demo of the app [here](https://www.youtube.com/watch?v=Pb5WR6-VmcA)
 
-If you have any idea how to improve my code let me know or create a pull request 😉.
+## Features
 
-## Todo
+## Installation
 
-Everything I am currently working on you can find [here](https://github.com/Azalurg/PythonGitScript/projects/1)
+## Usage
 
-## Requirements and installation 
+## Contributing
 
-You will need:
-- git
-- python 3.5 (or higher)
+I welcome any ideas or improvements to the code! If you have suggestions, feel free to:
 
-To install the app in the root directory run ```python setup.py install``` 
+- Open an issue to discuss potential changes or report bugs.
+- Create a pull request with your improvements. Please ensure your code follows the project's style guidelines (if applicable).
 
-## Start the app
+## TODO
 
-In order to start, you can run one of the scripts from the  ```/scripts``` directory or manually run the **pythonGitManager.py** file.
+## Why I Made This
 
-Be aware, to work script needs your git accounts/ssh-keys/passwords to be safe on your PC (maybe in the future it will change).
+This tool was born out of my need to manage multiple university repositories efficiently. Instead of manually updating each repo, I created Multi Git Manager to automate the process, saving me time and effort. I hope it can help others in similar situations!
