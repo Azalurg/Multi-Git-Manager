@@ -1,17 +1,12 @@
-from commands import commands
-from termcolor import colored
-import helper
+from pathlib import Path
 
+from multi_git_manager.src.config_handler import ConfigHandler
+from multi_git_manager.src.manager import Manager
+from multi_git_manager.src.repository import Repository
 
-def main():
-    helper.initiate()
-    print(colored("===== Welcome to git-python-manager =====", "cyan"))
-    print(colored("* To see all commands type 'help' *", "yellow"))
-    command = ""
-    while command != "exit" and command != "close":
-        command = input(">>> ")
-        if command in commands.keys():
-            commands[command]["function"]()
+if __name__ == "__main__":
+    config = ConfigHandler("repo_config.json")
+    repos_paths = config.get_repositories()
 
-
-main()
+    for repo in repos_paths:
+        print(Repository(Path(repo)))

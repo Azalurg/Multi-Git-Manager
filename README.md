@@ -23,6 +23,8 @@ I welcome any ideas or improvements to the code! If you have suggestions, feel f
 
 ## TODO
 
+- move all prints to a logger
+
 ## Why I Made This
 
 This tool was born out of my need to manage multiple university repositories efficiently. Instead of manually updating each repo, I created Multi Git Manager to automate the process, saving me time and effort. I hope it can help others in similar situations!

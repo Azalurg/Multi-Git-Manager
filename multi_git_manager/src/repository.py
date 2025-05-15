@@ -50,7 +50,7 @@ class Repository:
         self.refresh()
 
     def __str__(self):
-        return f"{self.name} {self.active_branch}"
+        return f"{self.name} {self.active_branch} {self.get_short_status()}"
 
     def refresh(self):
         self.repo = Repo(self.path)
