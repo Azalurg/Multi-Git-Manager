@@ -87,10 +87,13 @@ class Repository:
         self.repo.git.push()
         self.refresh()
 
-    def git_commit(self):
-        now = datetime.now()
-        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        self.repo.git.commit("-m", f"Auto commit {dt_string}")
+    def git_commit(self, message: str | None = None):
+        if message is None:
+            now = datetime.now()
+            dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+            message = f"Auto commit {dt_string}"
+
+        self.repo.git.commit("-m", message)
         self.refresh()
 
     def git_add_all(self):

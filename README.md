@@ -24,6 +24,7 @@ I welcome any ideas or improvements to the code! If you have suggestions, feel f
 ## TODO
 
 - move all prints to a logger
+- move exception handling of the git commands to class Repository
 
 ## Why I Made This
 

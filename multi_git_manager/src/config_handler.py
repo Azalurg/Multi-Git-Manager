@@ -1,7 +1,7 @@
 import json
 from os import PathLike
 from pathlib import Path
-from typing import List
+from typing import List, Set
 
 
 class ConfigHandler:
@@ -12,7 +12,7 @@ class ConfigHandler:
     def __init__(self, config_path: str = "repo_config.json"):
         self._config_path = Path(config_path)
         self._config = {}
-        self._paths_str: List[str] = []
+        self._paths_str: Set[str] = set()
         self._load_config()
 
     def _load_config(self) -> None:
@@ -22,7 +22,7 @@ class ConfigHandler:
                 with open(self._config_path, 'r') as f:
                     self._config = json.load(f)
                 print(f"Loaded configuration from {self._config_path}")
-                self._paths_str = self._config["paths"]
+                self._paths_str = set(self._config["paths"])
             else:
                 print(f"No config file found at {self._config_path}. Starting with empty config.")
         except Exception as e:
@@ -39,19 +39,19 @@ class ConfigHandler:
             print(f"Error saving config: {e}")
             return False
 
-    def add_repository(self, path: PathLike) -> bool:   # TODO: improve this function
+    def add_repository(self, path: PathLike) -> bool:
         path_str = str(path)
-        self._paths_str.append(path_str)
-        self._config["paths"] = self._paths_str
+        self._paths_str.add(path_str)
+        self._config["paths"] = list(self._paths_str)
         return self._save_config()
 
-    def remove_repository(self, position: int) -> bool: # TODO: improve this function
-        if len(self._paths_str) < position:
-            print(f"Position {position} out of range.")
+    def remove_repository(self, path: PathLike) -> bool:
+        if str(path) not in self._paths_str:
             return False
-        self._paths_str.pop(position)
-        self._config["paths"] = self._paths_str
+        self._paths_str.remove(str(path))
         return self._save_config()
 
     def get_repositories(self) -> List[str]:
-        return self._paths_str
+        repositories = list(self._paths_str)
+        repositories.sort()
+        return repositories
