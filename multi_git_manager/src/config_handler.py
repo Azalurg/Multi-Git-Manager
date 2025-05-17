@@ -1,4 +1,5 @@
 import json
+import os
 from os import PathLike
 from pathlib import Path
 from typing import List, Set
@@ -26,6 +27,8 @@ class ConfigHandler:
                 self._paths_str = set(self._config["paths"])
             else:
                 print(f"No config file found at {self._config_path}. Starting with empty config.")
+                with open(self._config_path, "w") as f:
+                    json.dump({"paths": []}, f, indent=4)
         except Exception as e:
             print(f"Error loading config: {e}")
             exit(1)

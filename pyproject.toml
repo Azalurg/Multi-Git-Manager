@@ -11,6 +11,7 @@ gitpython = "^3.1.44"
 rich = "^14.0.0"
 termcolor = "^3.1.0"
 textual = "^3.2.0"
+click = "^8.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
