@@ -9,6 +9,7 @@ class ConfigHandler:
     For now this component is mainly use to manage read and write git repositories to the json file.
     In the future the support for customisation and configuration may be added.
     """
+
     def __init__(self, config_path: str = "repo_config.json"):
         self._config_path = Path(config_path)
         self._config = {}
@@ -19,7 +20,7 @@ class ConfigHandler:
         """Load the configuration from the JSON file and extract repositories paths."""
         try:
             if self._config_path.exists():
-                with open(self._config_path, 'r') as f:
+                with open(self._config_path, "r") as f:
                     self._config = json.load(f)
                 print(f"Loaded configuration from {self._config_path}")
                 self._paths_str = set(self._config["paths"])
@@ -31,7 +32,7 @@ class ConfigHandler:
 
     def _save_config(self) -> bool:
         try:
-            with open(self._config_path, 'w') as f:
+            with open(self._config_path, "w") as f:
                 json.dump(self._config, f, indent=4)
             print(f"Saved configuration to {self._config_path}")
             return True

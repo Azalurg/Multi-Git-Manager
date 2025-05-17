@@ -20,7 +20,7 @@ class ShortStatus:
         elif self.ahead > 0:
             message += f"{self.ahead}> "
 
-        if self.staged> 0:
+        if self.staged > 0:
             message += f"+{self.staged} "
         if self.modified > 0:
             message += f"!{self.modified} "
@@ -28,6 +28,7 @@ class ShortStatus:
             message += f"?{self.untracked}"
 
         return message
+
 
 class Repository:
     def __init__(self, path: PathLike, name: str | None = None):

@@ -14,7 +14,7 @@ class Manager:
     You can think of it as a backend of the regular web application where each available function is and api endpoint available for your frontend.
     """
 
-    def __init__(self, config_handler: 'ConfigHandler'):
+    def __init__(self, config_handler: "ConfigHandler"):
         self.repositories: List[Repository] = []
         self.config_handler = config_handler
         self.import_repositories()
@@ -32,7 +32,6 @@ class Manager:
                 return False
         return True
 
-
     def add_repository(self, path: PathLike) -> Repository | None:
         """Add a repository to the manager and config."""
         if self.config_handler.add_repository(path):
@@ -42,8 +41,6 @@ class Manager:
             return repo
         else:
             return None
-
-
 
     def remove_repository(self, path: PathLike) -> bool:
         """Remove a repository from the manager and config."""
@@ -60,8 +57,6 @@ class Manager:
         print(f"Failed to remove repository {path} from config.")
         return False
 
-    # TODO: continue down
-
     def list_repositories(self) -> List[Repository]:
         return self.repositories
 
@@ -72,7 +67,6 @@ class Manager:
             repo.refresh()
 
         print(f"All repositories refreshed ({len(self.repositories)})")
-
 
     def pull_all(self) -> None:
         """Pull updates for all repositories from their remote branches."""
